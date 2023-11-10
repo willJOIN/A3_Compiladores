@@ -9,13 +9,17 @@ def tokenizar_input(data: str) -> None:
         'INTEGER',
         'PLUS',
         'MINUS',
+        'TIMES',
+        'DIVIDE',
         'LPAREN',
         'RPAREN',
     )
 
-    # Regras regex de tokens especificos
+    # Regras regex de tokens
     t_PLUS = r'\+'
     t_MINUS = r'-'
+    t_TIMES = r'\*'
+    t_DIVIDE = r'/'
     t_LPAREN = r'\('
     t_RPAREN = r'\)'
 
@@ -28,17 +32,10 @@ def tokenizar_input(data: str) -> None:
         t.value = int(t.value)
         return t
 
+    # Função para lidar com erros léxicos
     def t_error(t):
         print(f"[ERROR]: Caractere ilegal: '{t.value[0]}'")
         t.lexer.skip(1)
-
-    def t_LPAREN_error(t):
-        r'\('
-        print("[ERROR]: Falta parenteses de fechamento.")
-
-    def t_RPAREN_error(t):
-        r'\)'
-        print("[ERROR]: Paranteses de fechamento sem um de abertura antes.")
 
     lexer = lex.lex()
 
@@ -53,3 +50,7 @@ def tokenizar_input(data: str) -> None:
             break 
         
         print(tok)
+
+    resultado = eval(data)
+    print("Resultado:", resultado)
+    
