@@ -26,13 +26,12 @@ def tokenizar_input(data: str) -> None:
     # Regra para ignorar espaços em branco
     t_ignore = ' \t'
 
-    # Função para lidar com números inteiros
+    # Lidar com ints
     def t_INTEGER(t):
         r'\d+'
         t.value = int(t.value)
         return t
 
-    # Função para lidar com erros léxicos
     def t_error(t):
         print(f"[ERROR]: Caractere ilegal: '{t.value[0]}'")
         t.lexer.skip(1)
