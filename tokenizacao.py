@@ -4,8 +4,7 @@ class Tokenizacao:
     def __init__(self) -> None:
         pass
     
-def tokenizar_input(str: data) -> :
-  # Definição dos tokens
+def tokenizar_input(data: str) -> None:
     tokens = (
         'INTEGER',
         'PLUS',
@@ -14,7 +13,7 @@ def tokenizar_input(str: data) -> :
         'RPAREN',
     )
 
-    # Regras de expressão regular para os tokens
+    # Regras regex de tokens especificos
     t_PLUS = r'\+'
     t_MINUS = r'-'
     t_LPAREN = r'\('
@@ -29,19 +28,17 @@ def tokenizar_input(str: data) -> :
         t.value = int(t.value)
         return t
 
-    # Tratamento de erros
     def t_error(t):
-        print(f"Illegal character '{t.value[0]}'")
+        print(f"[ERROR]: Caractere ilegal: '{t.value[0]}'")
         t.lexer.skip(1)
 
-    # Verificação de erros para parênteses desbalanceados
     def t_LPAREN_error(t):
         r'\('
-        print("Error: Unbalanced parentheses. Missing closing parenthesis.")
+        print("[ERROR]: Falta parenteses de fechamento.")
 
     def t_RPAREN_error(t):
         r'\)'
-        print("Error: Unbalanced parentheses. Unexpected closing parenthesis.")
+        print("[ERROR]: Paranteses de fechamento sem um de abertura antes.")
 
     lexer = lex.lex()
 
@@ -53,6 +50,6 @@ def tokenizar_input(str: data) -> :
         tok = lexer.token()
         
         if not tok:
-            break  # No more input
+            break 
         
         print(tok)
