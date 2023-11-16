@@ -42,6 +42,10 @@ def tokenizar_input(data: str) -> None:
 
     print("Tokens:")
     
+    num_palavras = 0
+    num_linhas = 0
+    num_caracteres = 0
+
     while True:
         tok = lexer.token()
         
@@ -49,7 +53,15 @@ def tokenizar_input(data: str) -> None:
             break 
         
         print(tok)
+        num_palavras += 1
 
-    resultado = eval(data)
-    print("Resultado:", resultado)
-    
+    num_linhas = data.count('\n') + 1
+    num_caracteres = len(data)
+
+    print("\nResultados:")
+    print("Número de palavras:", num_palavras)
+    print("Número de linhas:", num_linhas)
+    print("Número de caracteres:", num_caracteres)
+
+    resultado_calculo = eval(data)
+    print("Resultado do cálculo:", resultado_calculo)
