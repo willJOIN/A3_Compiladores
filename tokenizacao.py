@@ -5,6 +5,7 @@ class Tokenizacao:
         pass
     
 def tokenizar_input(data: str) -> None:
+    # Tokens possiveis
     tokens = (
         'INTEGER',
         'PLUS',
@@ -33,30 +34,35 @@ def tokenizar_input(data: str) -> None:
         return t
 
     def t_error(t):
-        print(f"[ERROR]: Caractere ilegal: '{t.value[0]}'")
-        t.lexer.skip(1)
+        raise Exception(f"[ERROR]: Caractere ilegal: '{t.value[0]}'")
+        # t.lexer.skip(1) Caso seja necessario pular e continuar
 
+    # Inicializa lexer
     lexer = lex.lex()
 
+    # Carrega dados no lexer
     lexer.input(data)
-
-    print("Tokens:")
     
     num_palavras = 0
     num_linhas = 0
     num_caracteres = 0
 
+    print("Tokens:")
+
     while True:
+        # Puxa token
         tok = lexer.token()
         
+        # Para se acabar tokens
         if not tok:
             break 
         
         print(tok)
         num_palavras += 1
 
+    data_without_white_spaces = data.replace(' ','')
     num_linhas = data.count('\n') + 1
-    num_caracteres = len(data)
+    num_caracteres = len(data_without_white_spaces)
 
     print("\nResultados:")
     print("Número de palavras:", num_palavras)
