@@ -7,26 +7,19 @@ William Menghi Hirano - RA: 822165217
 
 ## Descrição:
 
-Este projeto analisa textos, tokenizando palavras e.
+Este projeto interpreta expressões numéricas, armazena e imprime variáveis na tela
 
 ## Instalação
-
-Instalar bibliotecas externas via package manager [pip](https://pip.pypa.io/en/stable/).
-
-```bash
-pip install -r "requirements.txt"
-```
 
 ## Uso
 
 1 - Rodar no terminal o comando:
 
 ```bash
-python main.py
+python main.py "nome_do_arquivo_a_interpretar"
 ```
 
-2 - 
-
-## Licença
-
-[MIT](https://choosealicense.com/licenses/mit/)
+tokens aceitos: strings -> "qualquer_coisa_dentro_de_aspas", operadores -> '+' '-' '(' ')' '^' '/' '*', numeros -> 123...n
+palavras reservadas: 
+'var' -> qualquer token que não comece com numero será aceito como uma variavel
+'print' -> a função print somente aceita variaveis
