@@ -25,7 +25,9 @@ pip install -r "requirements.txt"
 python main.py
 ```
 
-2 - 
+2 - Enviar expressões matemáticas para as tais serem calculadas, tokenizadas e analisadas.
+
+Temos uma versão alternativa do código na branch "alternative-interpreter" com features experimentais.
 
 ## Licença
 
