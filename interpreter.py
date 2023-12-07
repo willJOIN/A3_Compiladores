@@ -102,10 +102,12 @@ def lexer(contents):
                     items.append(("symbol", token))
 
                 # verificar se o token é um operador
-                elif token in ['+','-','**','/','=','^']:
+                elif token in ['+','-','**','/','=','^','*']:
                     items.append(("operator", token))
                 
-            nLines.append(items) 
+            nLines.append(items)
+        if lparen_count != rparen_count:
+            raise Exception('missing parantesis')
     return nLines
 
 # All Symbols. Anything not in here  is considered a variable
@@ -165,10 +167,11 @@ def parse(file):
                                 inst_line = 'Vars["'+ token[1] + '"]'
                             else:
                                 # throw error
-                                break
+                                raise Exception('this Variable does not exist')
                     else:
                         if token[1] in Vars:
                             inst_line = inst_line.replace('$v', str(Vars[token[1]]))
+                
             elif token[0] == 'operator':
                 inst_line += token[1]
             elif token[0] == 'number':
@@ -176,9 +179,10 @@ def parse(file):
             elif token[0] == 'string':
                 inst_line += '"' + token[1] + '"'
             elif token[0] == 'lparen':
-                inst_line += '"' + token[1] + '"'
+                inst_line += token[1]
             elif token[0] == 'rparen':
-                inst_line += '"' + token[1] + '"'
+                inst_line += token[1]
+                
         # verificar se a linha é uma expressão numérica e então utilizar a função exec('print({eval(int_line)})')
         if is_line_expr(line):
             inst_line = inst_line.replace('^','**')
@@ -191,4 +195,4 @@ def is_line_expr(line):
     for token in line:
         if token[0] == 'symbol':
             return False
-    return True 
+    return True
